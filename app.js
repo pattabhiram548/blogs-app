@@ -16,9 +16,7 @@ dotenv.config()
 connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(cors({
-    origin:"http://localhost:5173"
-}))
+app.use(cors())
 
 app.get("/", (req, res)=>{
     res.send("API is running.....")
@@ -37,6 +35,4 @@ app.post('/auth/login', handleLogin)
 
 app.get("/api/admin",authMiddleware,adminOnly, handleAdmin)
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`Server is running at ${process.env.PORT}`)
-})
+module.exports = app;
